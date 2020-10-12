@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// Components
+import { Link } from 'react-router-dom';
+
 // Assets
 import landing from '../../assets/images/landing.svg';
 
@@ -94,7 +97,7 @@ export const Location = styled.div`
   }
 `;
 
-export const EnterLink = styled.a`
+export const EnterLink = styled(Link)`
   position: absolute;
 
   right: 8px;

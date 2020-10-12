@@ -1,11 +1,13 @@
 import React from 'react';
 
-function App() {
+import Theme from './containers/Theme';
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      opa
-    </div>
+    <Theme>
+      <div className="App">opa</div>
+    </Theme>
   );
-}
+};
 
 export default App;

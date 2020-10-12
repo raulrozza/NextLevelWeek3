@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+
+// Components
+import Loading from './components/Loading';
 
 // Containers
+import { BrowserRouter } from 'react-router-dom';
 import Theme from './containers/Theme';
 
 // Routes
-import Landing from './pages/Landing';
+import MainRoutes from './routes/main.routes';
 
 const App: React.FC = () => {
   return (
     <Theme>
-      <Landing />
+      <BrowserRouter>
+        <Suspense fallback={Loading}>
+          <MainRoutes />
+        </Suspense>
+      </BrowserRouter>
     </Theme>
   );
 };

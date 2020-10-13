@@ -1,5 +1,9 @@
 import express from 'express';
 
+import './database/connection';
+
 const app = express();
 
-app.listen(5000);
+app.use(express.json());
+
+app.listen(5000, () => console.log('Server running'));

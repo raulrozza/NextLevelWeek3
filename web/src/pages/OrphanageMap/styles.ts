@@ -19,7 +19,7 @@ export const Container = styled.div`
 export const SideBar = styled.aside`
   width: 440px;
 
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.primaryGradient};
 
   padding: 80px;
 
@@ -68,7 +68,7 @@ export const CreateOrphanageButton = styled(Link)`
   height: 64px;
   border-radius: 28px;
 
-  background: ${({ theme }) => theme.colors.quarternary};
+  background: ${({ theme }) => theme.colors.primary};
 
   display: flex;
   align-items: center;
@@ -79,6 +79,6 @@ export const CreateOrphanageButton = styled(Link)`
   transition: background-color 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.quarternaryStrong};
+    background: ${({ theme }) => theme.colors.primaryLight};
   }
 `;

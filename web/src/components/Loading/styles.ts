@@ -8,6 +8,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.primaryGradient};
   color: ${({ theme }) => theme.colors.secondary};
 `;

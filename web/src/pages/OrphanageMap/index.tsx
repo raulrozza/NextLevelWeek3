@@ -31,7 +31,7 @@ const OrphanageMap: React.FC = () => {
 
       <CityMap />
 
-      <CreateOrphanageButton to="">
+      <CreateOrphanageButton to="/orphanages/create">
         <FiPlus />
       </CreateOrphanageButton>
     </Container>

@@ -4,7 +4,9 @@ import React, { lazy } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 // Pages
+const CreateOrphanage = lazy(() => import('../pages/CreateOrphanage'));
 const Landing = lazy(() => import('../pages/Landing'));
+const Orphanage = lazy(() => import('../pages/Orphanage'));
 const OrphanageMap = lazy(() => import('../pages/OrphanageMap'));
 
 const MainRoutes: React.FC = () => {
@@ -15,6 +17,12 @@ const MainRoutes: React.FC = () => {
       </Route>
       <Route path="/app">
         <OrphanageMap />
+      </Route>
+      <Route path="/orphanages/create">
+        <CreateOrphanage />
+      </Route>
+      <Route path="/orphanages/:id">
+        <Orphanage />
       </Route>
 
       <Redirect from="*" to="/" />

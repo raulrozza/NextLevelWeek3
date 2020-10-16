@@ -14,7 +14,7 @@ export const Container = styled.section`
   justify-content: center;
   align-items: center;
 
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.primaryGradient};
 `;
 
 export const ContentWrapper = styled.div`

@@ -19,6 +19,14 @@ export const Main = styled.main`
 
     overflow: hidden;
 
+    .leaflet-container {
+      margin-bottom: 48px;
+      border-radius: 28px;
+      border: 1px solid ${({ theme }) => theme.colors.gray2};
+
+      overflow: hidden;
+    }
+
     fieldset {
       border: 0;
 
@@ -81,43 +89,6 @@ export const Main = styled.main`
         padding: 16px;
         line-height: 28px;
       }
-
-      .new-image {
-        width: 100%;
-        height: 64px;
-        background: ${({ theme }) => theme.colors.whiteNotSoWhite};
-        border: 1px dashed ${({ theme }) => theme.colors.primaryOpaque};
-        border-radius: 20px;
-        cursor: pointer;
-      }
-
-      .button-select {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-
-        button {
-          height: 64px;
-          background: ${({ theme }) => theme.colors.whiteNotSoWhite};
-          border: 1px solid ${({ theme }) => theme.colors.gray};
-          color: ${({ theme }) => theme.colors.textMain};
-          cursor: pointer;
-        }
-
-        button.active {
-          background: ${({ theme }) => theme.colors.bluishWhite};
-          border: 1px solid ${({ theme }) => theme.colors.quarternaryLight};
-          color: ${({ theme }) => theme.colors.quarternaryDark};
-        }
-
-        button:first-child {
-          border-radius: 20px 0px 0px 20px;
-        }
-
-        button:last-child {
-          border-radius: 0 20px 20px 0;
-          border-left: 0;
-        }
-      }
     }
 
     button.confirm-button {
@@ -146,5 +117,63 @@ export const Main = styled.main`
         background: ${({ theme }) => theme.colors.quarternaryShift};
       }
     }
+  }
+`;
+
+export const ImagesContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+
+  .new-image {
+    height: 96px;
+    background: ${({ theme }) => theme.colors.whiteNotSoWhite};
+    border: 1px dashed ${({ theme }) => theme.colors.primaryOpaque};
+    border-radius: 20px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    height: 96px;
+    object-fit: cover;
+
+    border-radius: 20px;
+  }
+
+  input {
+    display: none;
+  }
+`;
+
+export const OpenOnWeekendsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  button {
+    height: 64px;
+    background: ${({ theme }) => theme.colors.whiteNotSoWhite};
+    border: 1px solid ${({ theme }) => theme.colors.gray};
+    color: ${({ theme }) => theme.colors.textMain};
+    cursor: pointer;
+  }
+
+  button.active {
+    background: ${({ theme }) => theme.colors.bluishWhite};
+    border: 1px solid ${({ theme }) => theme.colors.quarternaryLight};
+    color: ${({ theme }) => theme.colors.quarternaryDark};
+  }
+
+  button:first-child {
+    border-radius: 20px 0px 0px 20px;
+  }
+
+  button:last-child {
+    border-radius: 0 20px 20px 0;
+    border-left: 0;
   }
 `;

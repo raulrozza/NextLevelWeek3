@@ -23,6 +23,11 @@ export default {
   quarternary: '#3cdc8c',
   quarternaryDark: '#37c77f',
   quarternaryShift: '#36cf82',
+
+  dangerLight: '#ffbcd4',
+  danger: '#FF6690',
+  dangerGradient: 'linear-gradient(154.16deg, #fdfbf5 7.85%, #ffffff 91.03%)',
+
   dark: '#0089a5',
 
   grayGradient1: 'linear-gradient(149.97deg, #e6f7fb 8.13%, #ffffff 92.67%)',

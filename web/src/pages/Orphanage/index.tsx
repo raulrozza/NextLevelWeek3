@@ -1,18 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import Aside from '../../components/Aside';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import Loading from '../../components/Loading';
+import MapContainer from './MapContainer';
+
+// Hooks
+import { useFetch } from '../../hooks/useFetch';
+import { useParams } from 'react-router-dom';
 
 // Icons
-import mapIcon from '../../constants/mapIcon';
 import { FaWhatsapp } from 'react-icons/fa';
 import { FiClock, FiInfo } from 'react-icons/fi';
 
 // Styles
-import { Container, Content, Images, Main } from './styles';
+import { Container, Content, ImageButton, Images, Main } from './styles';
 
-const Orphanage: React.FC = () => {
+// Types
+import { withTheme } from 'styled-components';
+import { IOrphanage } from '../../interfaces/api/Orphanage';
+import { OrphanageParams, OrphanageProps } from './types';
+
+const Orphanage: React.FC<OrphanageProps> = ({ theme }) => {
+  const { id } = useParams<OrphanageParams>();
+  const { data: orphanage, loading } = useFetch<IOrphanage>(
+    `/orphanages/${id}`,
+  );
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  if (loading) return <Loading />;
+  if (!orphanage) return null;
+
   return (
     <Container>
       <Aside />
@@ -20,102 +38,59 @@ const Orphanage: React.FC = () => {
       <Main>
         <div className="orphanage-details">
           <img
-            src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-            alt="Lar das meninas"
+            src={orphanage.images[activeImageIndex].url}
+            alt={orphanage.name}
           />
 
           <Images>
-            <button className="active" type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
+            {orphanage.images.map((image, index) => (
+              <ImageButton
+                active={index === activeImageIndex}
+                key={image.id}
+                className="active"
+                type="button"
+                onClick={() => setActiveImageIndex(index)}
+              >
+                <img src={image.url} alt={orphanage.name} />
+              </ImageButton>
+            ))}
           </Images>
 
           <Content>
-            <h1>Lar das meninas</h1>
-            <p>
-              Presta assistência a crianças de 06 a 15 anos que se encontre em
-              situação de risco e/ou vulnerabilidade social.
-            </p>
+            <h1>{orphanage.name}</h1>
+            <p>{orphanage.about}</p>
 
-            <div className="map-container">
-              <Map
-                center={[-27.2092052, -49.6401092]}
-                zoom={16}
-                style={{ width: '100%', height: 280 }}
-                dragging={false}
-                touchZoom={false}
-                zoomControl={false}
-                scrollWheelZoom={false}
-                doubleClickZoom={false}
-              >
-                <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <Marker
-                  interactive={false}
-                  icon={mapIcon}
-                  position={[-27.2092052, -49.6401092]}
-                />
-              </Map>
-
-              <footer>
-                <a href="">Ver rotas no Google Maps</a>
-              </footer>
-            </div>
+            <MapContainer orphanage={orphanage} />
 
             <hr />
 
             <h2>Instruções para visita</h2>
-            <p>
-              Venha como se sentir mais à vontade e traga muito amor para dar.
-            </p>
+            <p>{orphanage.instructions}</p>
 
             <div className="open-details">
               <div className="hour">
-                <FiClock size={32} color="#15B6D6" />
+                <FiClock size={32} color={theme.colors.primary} />
                 Segunda à Sexta <br />
-                8h às 18h
+                {orphanage.opening_hours}
               </div>
-              <div className="open-on-weekends">
-                <FiInfo size={32} color="#39CC83" />
-                Atendemos <br />
-                fim de semana
-              </div>
+
+              {orphanage.open_on_weekends ? (
+                <div className="open-on-weekends">
+                  <FiInfo size={32} color={theme.colors.quarternaryDark} />
+                  Atendemos <br />
+                  fim de semana
+                </div>
+              ) : (
+                <div className="open-on-weekends dont-open">
+                  <FiInfo size={32} color={theme.colors.danger} />
+                  Não atendemos <br />
+                  fim de semana
+                </div>
+              )}
             </div>
 
             <button type="button" className="contact-button">
-              <FaWhatsapp size={20} color="#FFF" />
+              <FaWhatsapp size={20} color={theme.colors.white} />
               Entrar em contato
             </button>
           </Content>
@@ -125,4 +100,4 @@ const Orphanage: React.FC = () => {
   );
 };
 
-export default Orphanage;
+export default withTheme(Orphanage);

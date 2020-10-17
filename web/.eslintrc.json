@@ -39,6 +39,7 @@
             "arrowParens": "avoid"
         }
       ],
+      "camelcase": 0,
       "react/prop-types": 0
     }
 }

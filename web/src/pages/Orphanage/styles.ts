@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ImageButtonProps } from './types';
 
 export const Container = styled.div`
   display: flex;
@@ -32,27 +33,23 @@ export const Images = styled.div`
   column-gap: 16px;
 
   margin: 16px 40px 0;
+`;
 
-  button {
-    border: 0;
+export const ImageButton = styled.button<ImageButtonProps>`
+  border: 0;
+  height: 88px;
+  background: none;
+  cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  outline: none;
+
+  opacity: ${({ active }) => (active ? 1 : 0.6)};
+
+  img {
+    width: 100%;
     height: 88px;
-    background: none;
-    cursor: pointer;
-    border-radius: 20px;
-    overflow: hidden;
-    outline: none;
-
-    opacity: 0.6;
-
-    &.active {
-      opacity: 1;
-    }
-
-    img {
-      width: 100%;
-      height: 88px;
-      object-fit: cover;
-    }
+    object-fit: cover;
   }
 `;
 
@@ -70,29 +67,6 @@ export const Content = styled.div`
     line-height: 28px;
     color: ${({ theme }) => theme.colors.textMain};
     margin-top: 24px;
-  }
-
-  .map-container {
-    margin-top: 64px;
-    background: ${({ theme }) => theme.colors.bluishWhite};
-    border: 1px solid ${({ theme }) => theme.colors.bluishGray};
-    border-radius: 20px;
-
-    footer {
-      padding: 20px 0;
-      text-align: center;
-
-      a {
-        line-height: 24px;
-        color: ${({ theme }) => theme.colors.dark};
-        text-decoration: none;
-      }
-    }
-
-    .leaflet-container {
-      border-bottom: 1px solid ${({ theme }) => theme.colors.gray2};
-      border-radius: 20px;
-    }
   }
 
   hr {
@@ -136,6 +110,12 @@ export const Content = styled.div`
         background: ${({ theme }) => theme.colors.grayGradient2};
         border: 1px solid ${({ theme }) => theme.colors.quarternaryLight};
         color: ${({ theme }) => theme.colors.quarternaryDark};
+
+        &.dont-open {
+          background: ${({ theme }) => theme.colors.dangerGradient};
+          border-color: ${({ theme }) => theme.colors.dangerLight};
+          color: ${({ theme }) => theme.colors.danger};
+        }
       }
     }
   }

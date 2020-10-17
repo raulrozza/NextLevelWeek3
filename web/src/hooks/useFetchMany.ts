@@ -22,7 +22,7 @@ export function useFetchMany<T = unknown>(URL: string): IFetchReturn<T> {
     if (result) setData(result);
 
     setLoading(false);
-  }, [URL]);
+  }, [URL, apiGet]);
 
   useEffect(() => {
     fetchFromApi();

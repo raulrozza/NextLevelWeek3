@@ -27,7 +27,8 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "react-hooks"
     ],
     "rules": {
       "prettier/prettier":[
@@ -40,6 +41,7 @@
         }
       ],
       "camelcase": 0,
+      "react-hooks/exhaustive-deps": "warn",
       "react/prop-types": 0
     }
 }
